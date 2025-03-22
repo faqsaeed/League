@@ -27,6 +27,6 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`Server is listening on http://localhost:${PORT}...`);
-  await testConnection(); // Ensure database connection
+  console.log(`Server is listening on http://localhost:${PORT}`);
+  await testConnection(); 
 });
