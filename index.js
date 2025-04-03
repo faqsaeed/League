@@ -1,10 +1,20 @@
 const express = require("express");
 const sql = require("mssql");
 const dbConfig = require("./backend/config/connectDB");
-
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
+// Import all route files
+const matchRoutes = require("./backend/routes/MatchRoutes");
+const playerRoutes = require("./backend/routes/PlayerRoutes");
+const playerStatsRoutes = require("./backend/routes/PlayerStatsRoutes");
+const playerTransactionRoutes = require("./backend/routes/PlayerTransactionRoutes");
+const teamRoutes = require("./backend/routes/TeamRoutes");
+const userRoutes = require("./backend/routes/UserRoutes");
+
 
 const PORT = 3000;
 
@@ -25,6 +35,15 @@ const testConnection = async () => {
 app.get("/", (req, res) => {
   return res.send("Hello, I am running!");
 });
+
+const apiPrefix = "/api";
+app.use(`${apiPrefix}/users`, userRoutes);
+app.use(`${apiPrefix}/teams`, teamRoutes);
+app.use(`${apiPrefix}/players`, playerRoutes);
+app.use(`${apiPrefix}/matches`, matchRoutes);
+app.use(`${apiPrefix}/stats`, playerStatsRoutes);
+app.use(`${apiPrefix}/transactions`, playerTransactionRoutes);
+
 
 app.listen(PORT, async () => {
   console.log(`Server is listening on http://localhost:${PORT}`);
