@@ -2,9 +2,9 @@ const express = require("express");
 const { getTeams, createTeam, updateTeam, deleteTeam } = require("../controllers/TeamController");
 const router = express.Router();
 
-router.get("/teams", getTeams);
-router.post("/teams", createTeam);
-router.put("/teams/:id", updateTeam);
-router.delete("/teams/:id", deleteTeam);
+router.get("/", getTeams);
+router.post("/", createTeam);
+router.put("/:id", updateTeam);
+router.delete("/:id", deleteTeam);
 
 module.exports = router;

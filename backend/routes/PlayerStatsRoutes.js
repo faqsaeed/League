@@ -2,9 +2,9 @@ const express = require("express");
 const statsRouter = express.Router();
 const { getPlayerStats, createPlayerStats, updatePlayerStats, deletePlayerStats } = require("../controllers/PlayerStatsController");
 
-statsRouter.get("/player-stats/:name", getPlayerStats);
-statsRouter.post("/player-stats", createPlayerStats);
-statsRouter.put("/player-stats/:id", updatePlayerStats);
-statsRouter.delete("/player-stats/:id", deletePlayerStats);
+statsRouter.get("/:name", getPlayerStats);
+statsRouter.post("/", createPlayerStats);
+statsRouter.put("/:id", updatePlayerStats);
+statsRouter.delete("/:id", deletePlayerStats);
 
 module.exports = statsRouter;

@@ -2,9 +2,9 @@ const express = require("express");
 const transactionRouter = express.Router();
 const { getTransactions, createTransaction, updateTransaction, deleteTransaction } = require("../controllers/PlayerTransactionController");
 
-transactionRouter.get("/transactions", getTransactions);
-transactionRouter.post("/transactions", createTransaction);
-transactionRouter.put("/transactions/:id", updateTransaction);
-transactionRouter.delete("/transactions/:id", deleteTransaction);
+transactionRouter.get("/", getTransactions);
+transactionRouter.post("/", createTransaction);
+transactionRouter.put("/:id", updateTransaction);
+transactionRouter.delete("/:id", deleteTransaction);
 
 module.exports = transactionRouter;
