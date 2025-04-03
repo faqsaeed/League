@@ -16,7 +16,7 @@ const teamRoutes = require("./backend/routes/TeamRoutes");
 const userRoutes = require("./backend/routes/UserRoutes");
 
 
-const PORT = 3000;
+const PORT = 5000;
 
 // Proper SQL Connection Pool
 const testConnection = async () => {
