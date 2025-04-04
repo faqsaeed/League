@@ -6,12 +6,15 @@ This Repository contains the **Sports League Management System** and is currentl
 ## Getting Started
 To run the backend localy:
 1. Clone the repository
+```bash
+  git clone https://github.com/faqsaeed/League
+```
 2. Install dependencies:
 ```bash
 npm install #for Windows
 sudo apt install npm #for Linux
 ```
-3. Starte the Server:
+3. Start the Server:
 ```bash
 npm run try
 ```
