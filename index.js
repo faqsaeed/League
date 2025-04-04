@@ -15,6 +15,9 @@ const playerTransactionRoutes = require("./backend/routes/PlayerTransactionRoute
 const teamRoutes = require("./backend/routes/TeamRoutes");
 const userRoutes = require("./backend/routes/UserRoutes");
 
+//for authentiaction and authorisation
+const authRoutes = require("./backend/routes/AuthRoutes"); // ✅ Import auth routes
+const { verifyToken } = require("./backend/middleware/AuthMiddleware"); // ✅ JWT middleware
 
 const PORT = 5000;
 
@@ -43,6 +46,9 @@ app.use(`${apiPrefix}/players`, playerRoutes);
 app.use(`${apiPrefix}/matches`, matchRoutes);
 app.use(`${apiPrefix}/stats`, playerStatsRoutes);
 app.use(`${apiPrefix}/transactions`, playerTransactionRoutes);
+
+// ✅ Authentication routes (Register/Login)
+app.use(`${apiPrefix}/auth`, authRoutes);
 
 
 app.listen(PORT, async () => {

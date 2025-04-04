@@ -1,10 +1,11 @@
 const express = require("express");
+const TeamRouter = express.Router();
 const { getTeams, createTeam, updateTeam, deleteTeam } = require("../controllers/TeamController");
-const router = express.Router();
+const {verifyToken, verifyAdmin, verifyOwnerForTeam} = require("../middleware/AuthMiddleware");
 
-router.get("/", getTeams);
-router.post("/", createTeam);
-router.put("/:id", updateTeam);
-router.delete("/:id", deleteTeam);
+TeamRouter.get("/", getTeams);
+TeamRouter.post("/", verifyToken, verifyAdmin, createTeam);
+TeamRouter.put("/:id",verifyToken, verifyOwnerForTeam, updateTeam);
+TeamRouter.delete("/:id",verifyToken, verifyAdmin, deleteTeam);
 
-module.exports = router;
+module.exports = TeamRouter;
