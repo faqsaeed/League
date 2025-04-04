@@ -8,7 +8,8 @@ To run the backend localy:
 1. Clone the repository
 2. Install dependencies:
 ```bash
-npm install
+npm install #for Windows
+sudo apt install npm #for Linux
 ```
 3. Starte the Server:
 ```bash
