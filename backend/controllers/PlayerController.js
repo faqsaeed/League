@@ -22,25 +22,24 @@ exports.getPlayers = async (req, res) => {
   }
 };
 
-// Get players by team ID
+// Get players by team name
 exports.getPlayersByTeam = async (req, res) => {
   try {
-    const { teamID } = req.params;
-    
-    if (!teamID || isNaN(parseInt(teamID))) {
-      return res.status(400).json({ message: 'Invalid team ID' });
+    const { teamName } = req.params;
+    if (!teamName) {
+      return res.status(400).json({ message: 'Invalid team name' });
     }
     
     const pool = await mssql.connect(dbConfig);
     const result = await pool.request()
-      .input('teamID', mssql.Int, parseInt(teamID))
+      .input('teamName', mssql.VarChar(255), teamName)
       .query(`
-        SELECT p.PlayerID, p.Name, p.Age, p.Position, p.TeamID, t.Name as TeamName, 
-               ps.Runs, ps.Wickets, ps.TotalInnings
+        SELECT p.PlayerID, p.Name, p.Age, p.Position, p.TeamID, t.Name as TeamName,
+        ps.Runs, ps.Wickets, ps.TotalInnings
         FROM Players p
-        LEFT JOIN Teams t ON p.TeamID = t.TeamID
+        INNER JOIN Teams t ON p.TeamID = t.TeamID
         LEFT JOIN PlayerStats ps ON p.PlayerID = ps.PlayerID
-        WHERE p.TeamID = @teamID
+        WHERE t.Name = @teamName
       `);
     
     res.status(200).json(result.recordset);

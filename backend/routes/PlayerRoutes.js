@@ -5,7 +5,7 @@ const {verifyToken, verifyOwnerForTeam} = require("../middleware/AuthMiddleware"
 
 
 playerRouter.get("/", getPlayers);
-playerRouter.get("/:teamID", getPlayersByTeam);
+playerRouter.get("/:teamName", getPlayersByTeam);
 playerRouter.post("/", verifyToken, verifyOwnerForTeam, createPlayer);
 playerRouter.put("/:id", verifyToken, verifyOwnerForTeam, updatePlayer);
 playerRouter.delete("/:id", verifyToken, verifyOwnerForTeam, deletePlayer);
