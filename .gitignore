@@ -1,0 +1,14 @@
+# Ignore node_modules directory
+node_modules/
+SQLQuery1.sql
+DB Proposal.pdf
+# Ignore specific files
+.env
+config.json
+
+# Ignore all log files
+*.log
+
+# Ignore build directories
+/dist
+/build
