@@ -11,8 +11,7 @@ To run the backend localy:
 ```
 2. Install dependencies:
 ```bash
-npm install #for Windows
-sudo apt install npm #for Linux
+npm install 
 ```
 3. Start the Server:
 ```bash
