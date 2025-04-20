@@ -4,7 +4,16 @@ SQLQuery1.sql
 DB Proposal.pdf
 # Ignore specific files
 .env
-config.json
+## envoirnment variables for reference
+###
+##DB_USER=SA
+##DB_PASSWORD=Pakistan1947
+##DB_SERVER=localhost
+##DB_DATABASE=SportsLeague
+##DB_PORT=1433
+##PORT=5000
+
+config.json 
 
 # Ignore all log files
 *.log
