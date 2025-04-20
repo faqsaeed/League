@@ -2,6 +2,8 @@ const express = require("express");
 const sql = require("mssql");
 const dbConfig = require("./backend/config/connectDB");
 const cors = require("cors");
+require("dotenv").config();
+
 
 const app = express();
 app.use(express.json());
@@ -17,7 +19,7 @@ const userRoutes = require("./backend/routes/UserRoutes");
 const authRoutes = require("./backend/routes/AuthRoutes"); 
 const PointTableRoute = require("./backend/routes/PointTableRoutes");
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Proper SQL Connection Pool
 const testConnection = async () => {

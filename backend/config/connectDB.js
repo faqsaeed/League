@@ -1,10 +1,11 @@
 const sql = require("mssql");
+require("dotenv").config();
 
 const config = {
-  user: "SA",
-  password: "Pakistan1947",
-  server: "localhost", // or your server address
-  database: "SportsLeague",
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
   options: {
     encrypt: true, // Use encryption
     trustServerCertificate: true, // Bypass SSL certificate issues
