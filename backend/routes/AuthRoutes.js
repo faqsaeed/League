@@ -57,7 +57,7 @@ authRouter.post("/login", async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        res.json({ message: "Login successful!", token });
+        res.json({ success: true, msg: "Login successful!", token });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
