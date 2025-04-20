@@ -6,7 +6,7 @@ function MainPage() {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/teams")
+    axios.get("http://localhost:5000/api/teams")
       .then(res => setTeams(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -16,8 +16,8 @@ function MainPage() {
       <h1>Teams</h1>
       <ul>
         {teams.map(team => (
-          <li key={team.TeamID}>
-            <Link to={`/teams/${team.TeamID}`}>{team.Name}</Link>
+          <li key={team.Name}>
+            <Link to={`/players/${team.Name}`}>{team.Name}</Link>
           </li>
         ))}
       </ul>
