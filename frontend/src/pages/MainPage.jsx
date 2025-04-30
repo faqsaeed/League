@@ -17,7 +17,7 @@ function MainPage() {
       <ul>
         {teams.map(team => (
           <li key={team.Name}>
-            <Link to={`/players/${team.Name}`}>{team.Name}</Link>
+            <Link to={`/teams/${team.Name}`}>{team.Name}</Link>
           </li>
         ))}
       </ul>

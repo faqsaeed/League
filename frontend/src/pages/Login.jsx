@@ -15,19 +15,19 @@ function Login() {
         username,
         password,
       });
-      setResponseMsg(res.data.msg);
-      if (res.data.success) {
+      if (res.data.success === true || res.data.success === "true") {
+        alert(res.data.msg);
         navigate('/main');
       }
+      
     } catch (err) {
       setResponseMsg(err.response?.data?.msg || 'Login failed');
-      
+      console.error(err);
     }
   };
 
   // Function to skip login and go directly to main page
   const skipLogin = () => {
-    // You might want to set some default user in localStorage if your app requires authentication
     localStorage.setItem('skipLogin', 'true');
     navigate('/main');
   };
