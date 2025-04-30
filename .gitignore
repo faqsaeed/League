@@ -6,12 +6,12 @@ DB Proposal.pdf
 .env
 ## envoirnment variables for reference
 ###
-##DB_USER=SA
-##DB_PASSWORD=Pakistan1947
-##DB_SERVER=localhost
-##DB_DATABASE=SportsLeague
-##DB_PORT=1433
-##PORT=5000
+##DB_USER
+##DB_PASSWORD
+##DB_SERVER=
+##DB_DATABASE
+##DB_PORT
+##PORT
 
 config.json 
 
