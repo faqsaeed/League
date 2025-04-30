@@ -1,0 +1,35 @@
+/* PlayerStatsPage.css */
+.stats-page {
+    background-color: #f1fdf6;
+    min-height: 100vh;
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .stats-heading {
+    color: #006400;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .stats-card {
+    background: white;
+    border: 2px solid #28a745;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,100,0,0.1);
+  }
+  
+  .stats-card p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .error-text {
+    color: red;
+    text-align: center;
+  }
+  

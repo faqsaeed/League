@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../styles/TeamPage.css";
 
@@ -19,8 +19,10 @@ function TeamPage() {
       <ul className="player-list">
         {players.map(player => (
           <li key={player.PlayerID} className="player-card">
-            <div className="player-name">{player.Name}</div>
-            <div className="player-position">Position: {player.Position}</div>
+            <Link to={`/players/${player.Name}`} className="player-link">
+              <div className="player-name">{player.Name}</div>
+              <div className="player-position">Position: {player.Position}</div>
+            </Link>
           </li>
         ))}
       </ul>
