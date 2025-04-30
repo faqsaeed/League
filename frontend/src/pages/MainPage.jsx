@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import "../styles/MainPage.css"; 
 function MainPage() {
   const [teams, setTeams] = useState([]);
 
@@ -12,12 +12,14 @@ function MainPage() {
   }, []);
 
   return (
-    <div>
-      <h1>Teams</h1>
-      <ul>
+    <div className="main-page">
+      <h1 className="main-heading">Pakistan Super League Teams</h1>
+      <ul className="team-list">
         {teams.map(team => (
-          <li key={team.Name}>
-            <Link to={`/teams/${team.Name}`}>{team.Name}</Link>
+          <li key={team.Name} className="team-card">
+            <Link to={`/teams/${team.Name}`} className="team-link">
+              {team.Name}
+            </Link>
           </li>
         ))}
       </ul>
