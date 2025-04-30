@@ -1,0 +1,47 @@
+/* TeamPage.css */
+.team-page {
+    background-color: #e6f5ea;
+    min-height: 100vh;
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .team-heading {
+    color: #006400;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .player-list {
+    max-width: 600px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .player-card {
+    background-color: #ffffff;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 100, 0, 0.1);
+    transition: 0.3s ease;
+  }
+  
+  .player-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 100, 0, 0.2);
+  }
+  
+  .player-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #006400;
+  }
+  
+  .player-position {
+    font-size: 14px;
+    color: #555;
+  }
+  
