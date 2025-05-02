@@ -5,6 +5,7 @@ import SignUp from "./pages/signup";
 import MainPage from "./pages/MainPage";
 import TeamPage from "./pages/TeamPage";
 import PlayerStatsPage from "./pages/PlayerStatPage";
+import PointTablePage from "./pages/PointTable";
 import Header from "./components/Header";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/points" element={<PointTablePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/main" element={<MainPage />} />

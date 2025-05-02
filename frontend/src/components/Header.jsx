@@ -19,6 +19,7 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
       <div className="logo" onClick={() => navigate("/")}>Pakistan Super League</div>
       <nav className="nav-links">
         <Link to="/main">Teams</Link>
+        <Link to="/points">Points Table</Link>
 
         {booleanValue ? (
           <Link to="/login" className="auth-btn">Login</Link>
