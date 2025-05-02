@@ -30,25 +30,35 @@ exports.getMatches = async (req, res) => {
 exports.getMatchesByTeam = async (req, res) => {
   try {
     const { teamName } = req.params;
-    
-    if (!teamName ) {
-      return res.status(400).json({ message: 'Invalid team ID' });
+
+    if (!teamName || teamName.trim() === '') {
+      return res.status(400).json({ message: 'Team name is required' });
     }
-    
+
     const pool = await mssql.connect(dbConfig);
+
     const result = await pool.request()
-      .input('teamName', mssql.VarChar(255), teamName)
+      .input('teamName', mssql.VarChar(255), teamName.trim())
       .query(`
         SELECT  m.MatchID, m.Date, m.Venue, t1.Name AS Team1, t2.Name AS Team2, m.Result
-        FROM Matches m JOIN Teams t1 ON m.Team1ID = t1.TeamID JOIN Teams t2 ON m.Team2ID = t2.TeamID
+        FROM Matches m
+        JOIN Teams t1 ON m.Team1ID = t1.TeamID
+        JOIN Teams t2 ON m.Team2ID = t2.TeamID
         WHERE t1.Name = @teamName OR t2.Name = @teamName
         ORDER BY m.Date DESC;
       `);
-    
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: `No matches found for team '${teamName}'` });
+    }
+
     res.status(200).json(result.recordset);
   } catch (error) {
     console.error('Error fetching matches by team:', error);
-    res.status(500).json({ message: 'Error fetching matches by team', error: error.message });
+    res.status(500).json({
+      message: 'Internal server error while fetching matches',
+      error: error.message
+    });
   }
 };
 
