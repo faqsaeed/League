@@ -1,0 +1,38 @@
+/* Header.css */
+.header {
+    background-color: #006400;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .nav-links a,
+  .auth-btn {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+  }
+  
+  .nav-links a:hover,
+  .auth-btn:hover {
+    opacity: 0.8;
+  }
+  
+  .logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+  }
+  
