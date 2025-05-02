@@ -16,10 +16,11 @@ function Login() {
         password,
       });
       if (res.data.success === true || res.data.success === "true") {
+        localStorage.setItem("token", res.data.token); 
+        localStorage.setItem('skipLogin', 'false');
         alert(res.data.msg);
         navigate('/main');
       }
-      
     } catch (err) {
       setResponseMsg(err.response?.data?.msg || 'Login failed');
       console.error(err);

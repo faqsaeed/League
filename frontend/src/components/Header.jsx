@@ -4,9 +4,12 @@ import "../styles/Header.css";
 
 function Header({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
+  const storedValue = localStorage.getItem('skipLogin');
+  const booleanValue = storedValue ? JSON.parse(storedValue) : false;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.setItem('skipLogin', 'true');
     setIsLoggedIn(false);
     navigate("/main");
   };
@@ -17,7 +20,7 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
       <nav className="nav-links">
         <Link to="/main">Teams</Link>
 
-        {!isLoggedIn ? (
+        {booleanValue ? (
           <Link to="/login" className="auth-btn">Login</Link>
         ) : (
           <button onClick={handleLogout} className="auth-btn logout-btn">Logout</button>
