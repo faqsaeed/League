@@ -26,27 +26,23 @@ exports.getMatches = async (req, res) => {
   }
 };
 
-// Get matches by team ID
+// Get matches by team Name
 exports.getMatchesByTeam = async (req, res) => {
   try {
-    const { teamID } = req.params;
+    const { teamName } = req.params;
     
-    if (!teamID || isNaN(parseInt(teamID))) {
+    if (!teamName ) {
       return res.status(400).json({ message: 'Invalid team ID' });
     }
     
     const pool = await mssql.connect(dbConfig);
     const result = await pool.request()
-      .input('teamID', mssql.Int, parseInt(teamID))
+      .input('teamName', mssql.VarChar(255), teamName)
       .query(`
-        SELECT m.MatchID, m.Date, m.Venue, m.Result,
-               m.Team1ID, t1.Name as Team1Name,
-               m.Team2ID, t2.Name as Team2Name
-        FROM Matches m
-        JOIN Teams t1 ON m.Team1ID = t1.TeamID
-        JOIN Teams t2 ON m.Team2ID = t2.TeamID
-        WHERE m.Team1ID = @teamID OR m.Team2ID = @teamID
-        ORDER BY m.Date DESC
+        SELECT  m.MatchID, m.Date, m.Venue, t1.Name AS Team1, t2.Name AS Team2, m.Result
+        FROM Matches m JOIN Teams t1 ON m.Team1ID = t1.TeamID JOIN Teams t2 ON m.Team2ID = t2.TeamID
+        WHERE t1.Name = @teamName OR t2.Name = @teamName
+        ORDER BY m.Date DESC;
       `);
     
     res.status(200).json(result.recordset);

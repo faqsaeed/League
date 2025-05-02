@@ -5,7 +5,7 @@ const {verifyToken, verifyAdmin} = require("../middleware/AuthMiddleware");
 
 
 matchRouter.get("/", getMatches);
-matchRouter.get("/:teamID", getMatchesByTeam);
+matchRouter.get("/:teamName", getMatchesByTeam);
 matchRouter.post("/", verifyToken, verifyAdmin, createMatch);
 matchRouter.put("/:id",verifyToken, verifyAdmin, updateMatch);
 matchRouter.delete("/:id",verifyToken, verifyAdmin, deleteMatch);
