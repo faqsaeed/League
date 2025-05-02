@@ -6,6 +6,7 @@ import MainPage from "./pages/MainPage";
 import TeamPage from "./pages/TeamPage";
 import PlayerStatsPage from "./pages/PlayerStatPage";
 import PointTablePage from "./pages/PointTable";
+import SchedulePage from "./pages/Match";
 import Header from "./components/Header";
 
 function App() {
@@ -36,12 +37,13 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/points" element={<PointTablePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/teams/:teamname" element={<TeamPage />} />
         <Route path="/players/:name" element={<PlayerStatsPage />} />
+        <Route path="/points" element={<PointTablePage />} />
+        <Route path="/schedule" element={<SchedulePage />} />
       </Routes>
     </>
   );

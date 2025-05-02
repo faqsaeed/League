@@ -20,7 +20,8 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
       <nav className="nav-links">
         <Link to="/main">Teams</Link>
         <Link to="/points">Points Table</Link>
-
+        <Link to="/schedule">Match Schedule</Link>
+        
         {booleanValue ? (
           <Link to="/login" className="auth-btn">Login</Link>
         ) : (
