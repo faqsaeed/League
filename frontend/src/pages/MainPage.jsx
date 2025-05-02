@@ -13,7 +13,7 @@ function MainPage() {
 
   return (
     <div className="main-page">
-      <h1 className="main-heading">Pakistan Super League Teams</h1>
+      <h1 className="main-heading">Teams</h1>
       <ul className="team-list">
         {teams.map(team => (
           <li key={team.Name} className="team-card">
