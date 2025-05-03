@@ -1,0 +1,38 @@
+.admin-dashboard {
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f9fb;
+    min-height: 100vh;
+  }
+  
+  .create-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+  
+  .team-actions {
+    margin-top: 10px;
+  }
+  
+  .edit-link, .delete-button {
+    margin-right: 10px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .edit-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .delete-button {
+    background: none;
+    border: none;
+    color: red;
+  }
+  

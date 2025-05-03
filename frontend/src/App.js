@@ -8,6 +8,9 @@ import PlayerStatsPage from "./pages/PlayerStatPage";
 import PointTablePage from "./pages/PointTable";
 import SchedulePage from "./pages/Match";
 import Header from "./components/Header";
+import TeamDashboard from "./pages/TeamDashboard";
+import CreateTeam from "./pages/createTeam";
+import EditTeam from "./pages/editTeam";
 
 function App() {
   const location = useLocation();
@@ -44,6 +47,9 @@ function App() {
         <Route path="/players/:name" element={<PlayerStatsPage />} />
         <Route path="/points" element={<PointTablePage />} />
         <Route path="/schedule" element={<SchedulePage />} />
+        <Route path="/admin/teamdashboard" element={<TeamDashboard />} />
+        <Route path="/create-team" element={<CreateTeam />} />
+        <Route path="/edit-team/:teamId" element={<EditTeam />} />
       </Routes>
     </>
   );

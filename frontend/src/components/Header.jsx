@@ -2,10 +2,10 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 
-function Header({ isLoggedIn, setIsLoggedIn }) {
+function Header({ setIsLoggedIn }) {
   const navigate = useNavigate();
-  const storedValue = localStorage.getItem('skipLogin');
-  const booleanValue = storedValue ? JSON.parse(storedValue) : false;
+  const storedValue = localStorage.getItem('token');
+  const booleanValue =(!(!storedValue));
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -22,11 +22,11 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
         <Link to="/points">Points Table</Link>
         <Link to="/schedule">Match Schedule</Link>
         
-        {booleanValue ? (
-          <Link to="/login" className="auth-btn">Login</Link>
-        ) : (
-          <button onClick={handleLogout} className="auth-btn logout-btn">Logout</button>
-        )}
+        {!booleanValue ? 
+        ( <Link to="/login" className="auth-btn">Login</Link> )
+        : 
+        ( <button onClick={handleLogout} className="auth-btn logout-btn">Logout</button> )
+        }
       </nav>
     </header>
   );
