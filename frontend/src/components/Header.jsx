@@ -12,6 +12,7 @@ function Header({ setIsLoggedIn }) {
     localStorage.setItem('skipLogin', 'true');
     setIsLoggedIn(false);
     navigate("/main");
+    window.location.reload(true);
   };
 
   return (

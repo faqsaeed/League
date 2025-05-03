@@ -27,11 +27,6 @@ function Login() {
     }
   };
 
-  // Function to skip login and go directly to main page
-  const skipLogin = () => {
-    localStorage.setItem('skipLogin', 'true');
-    navigate('/main');
-  };
 
   return (
     <div style={styles.container}>
@@ -55,18 +50,7 @@ function Login() {
           />
           <button type="submit" style={styles.button}>Login</button>
         </form>
-        <div style={styles.skipContainer}>
-          <button 
-            onClick={skipLogin} 
-            style={styles.skipButton}
-          >
-            Skip Login
-          </button>
-        </div>
-        <p>{responseMsg}</p>
-        <p>
-          Don't have an account? <Link to="/signup">signup</Link>
-        </p>
+        
       </div>
 
       <div style={styles.right}>
