@@ -27,7 +27,7 @@ function App() {
     };
   }, []);
 
-  const hideHeaderPaths = ["/", "/login", "/signup"];
+  const hideHeaderPaths = ["/login", "/signup"];
 
   return (
     <>
@@ -36,7 +36,7 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/main" element={<MainPage />} />
