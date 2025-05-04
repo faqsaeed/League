@@ -32,6 +32,7 @@ function TeamDashboard() {
   }, [navigate]);
 
   const handleDelete = async (teamId) => {
+    if(isAdmin);
     if (!window.confirm("Are you sure you want to delete this team?")) return;
     try {
       await axios.delete(`http://localhost:5000/api/teams/${teamId}`, {
