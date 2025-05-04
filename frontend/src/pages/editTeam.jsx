@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import adminCheck from "../services/adminCheck";
 import "../styles/TeamForm.css";
 
 function EditTeam() {
@@ -8,8 +9,20 @@ function EditTeam() {
   const [name, setName] = useState("");
   const [coach, setCoach] = useState("");
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    const checkAdminStatus = () => {
+      const authStatus = adminCheck();
+           
+        if (!authStatus.isAuthenticated || !authStatus.isAdmin) 
+         {
+           navigate('/');
+         }
+         setIsAdmin(true);      
+       };
+         
+         checkAdminStatus();
     axios.get(`http://localhost:5000/api/teams/${teamId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -20,7 +33,7 @@ function EditTeam() {
     }).catch(err => {
       console.error("Failed to fetch team", err);
     });
-  }, [teamId]);
+  }, [teamId, navigate]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();

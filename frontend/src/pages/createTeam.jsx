@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import adminCheck from "../services/adminCheck";
 import "../styles/TeamForm.css";
 
 function CreateTeam() {
@@ -9,8 +10,23 @@ function CreateTeam() {
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  
   const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState(false);
+  
+    useEffect(() => {
+        const checkAdminStatus = () => {
+          const authStatus = adminCheck();
+          
+          if (!authStatus.isAuthenticated || !authStatus.isAdmin) 
+          {
+            navigate('/');
+          }
+          setIsAdmin(true);      
+        };
+        
+        checkAdminStatus();
+    }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
