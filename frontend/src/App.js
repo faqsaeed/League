@@ -13,6 +13,9 @@ import EditTeam from "./pages/editTeam";
 import MatchDashboard from './pages/MatchDashboard';
 import CreateMatch from './pages/CreateMatch';
 import EditMatch from "./pages/EditMatch";
+import PlayerDashboard from "./pages/PlayerDashboard";
+import CreatePlayer from "./pages/CreatePlayer";
+import EditPlayer from "./pages/EditPlayer";
 
 function App() {
   const location = useLocation();
@@ -54,7 +57,10 @@ function App() {
         <Route path="/admin/matchdashboard" element={<MatchDashboard />} />
         <Route path="/admin/creatematch" element={<CreateMatch />} />
         <Route path="/admin/editmatch/:matchId" element={<EditMatch />} />
-      </Routes>
+        <Route path="/admin/playerdashboard/:teamId" element={<PlayerDashboard />} />
+        <Route path="/admin/createplayer/:ID" element={<CreatePlayer/>} />
+        <Route path="/admin/editplayer/:id" element={<EditPlayer />} />
+</Routes>
     </>
   );
 }
