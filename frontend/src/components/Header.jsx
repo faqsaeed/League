@@ -1,11 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import adminCheck from '../services/adminCheck';
 import "../styles/Header.css";
 
 function Header({ setIsLoggedIn }) {
   const navigate = useNavigate();
-  const storedValue = localStorage.getItem('token');
-  const booleanValue =(!(!storedValue));
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -14,7 +13,8 @@ function Header({ setIsLoggedIn }) {
     navigate("/main");
     window.location.reload(true);
   };
-
+  const auth =  adminCheck();
+         
   return (
     <header className="header">
       <div className="logo" onClick={() => navigate("/")}>Pakistan Super League</div>
@@ -23,7 +23,7 @@ function Header({ setIsLoggedIn }) {
         <Link to="/points">Points Table</Link>
         <Link to="/schedule">Match Schedule</Link>
         
-        {!booleanValue ? 
+        {!auth.isAuthenticated ? 
         ( <Link to="/login" className="auth-btn">Login</Link> )
         : 
         ( <button onClick={handleLogout} className="auth-btn logout-btn">Logout</button> )
