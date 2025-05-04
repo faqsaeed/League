@@ -6,11 +6,28 @@ const Matches = () => {
   const [matches, setMatches] = useState([]);
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState('');
-
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        if (payload.role === "Admin") {
+          setIsAdmin(true);
+        }
+      } catch (err) {
+        console.error("Invalid token format");
+      }
+    }
+
     fetchAllMatches();
     fetchTeams();
   }, []);
+
+
+
+
 
   const fetchAllMatches = async () => {
     try {
@@ -49,6 +66,11 @@ const Matches = () => {
 
   return (
     <div className="matches-container">
+      {isAdmin && (
+        <div style={{ marginBottom: '20px' }}>
+          <a href="/admin/matchdashboard" className="admin-button">Go to Admin Dashboard</a>
+        </div>
+       )}
       <h2 className="matches-heading">Matches</h2>
 
       <div className="filter-section">

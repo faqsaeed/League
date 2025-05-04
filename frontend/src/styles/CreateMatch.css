@@ -1,0 +1,42 @@
+.create-match {
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+  }
+  
+  .create-match h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  
+  .create-match form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .create-match input,
+  .create-match select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .create-match button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .create-match button:hover {
+    background-color: #0056b3;
+  }
+  

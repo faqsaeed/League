@@ -10,6 +10,9 @@ import Header from "./components/Header";
 import TeamDashboard from "./pages/TeamDashboard";
 import CreateTeam from "./pages/createTeam";
 import EditTeam from "./pages/editTeam";
+import MatchDashboard from './pages/MatchDashboard';
+import CreateMatch from './pages/CreateMatch';
+import EditMatch from "./pages/EditMatch";
 
 function App() {
   const location = useLocation();
@@ -46,8 +49,11 @@ function App() {
         <Route path="/points" element={<PointTablePage />} />
         <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/admin/teamdashboard" element={<TeamDashboard />} />
-        <Route path="/create-team" element={<CreateTeam />} />
-        <Route path="/edit-team/:teamId" element={<EditTeam />} />
+        <Route path="/admin/createteam" element={<CreateTeam />} />
+        <Route path="/admin/editteam/:teamId" element={<EditTeam />} />
+        <Route path="/admin/matchdashboard" element={<MatchDashboard />} />
+        <Route path="/admin/creatematch" element={<CreateMatch />} />
+        <Route path="/admin/editmatch/:matchId" element={<EditMatch />} />
       </Routes>
     </>
   );

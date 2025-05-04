@@ -1,0 +1,61 @@
+.match-dashboard {
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    text-align: center;
+  }
+  
+  .match-dashboard h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .match-dashboard button {
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 6px;
+  }
+  
+  .match-dashboard button:hover {
+    background-color: #218838;
+  }
+  
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .match-table th, .match-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover, .delete-btn:hover {
+    opacity: 0.9;
+  }
+  
