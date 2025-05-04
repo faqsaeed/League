@@ -148,6 +148,51 @@ exports.createPlayer = async (req, res) => {
   }
 };
 
+// Get player by Player ID
+exports.getPlayerByPlayerId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate id parameter
+    if (!id || isNaN(parseInt(id))) {
+      return res.status(400).json({ message: 'Valid player ID is required' });
+    }
+
+    const pool = await mssql.connect(dbConfig);
+    
+    // Query player information along with stats in a single query
+    const result = await pool.request()
+      .input('playerId', mssql.Int, id)
+      .query(`
+        SELECT 
+          p.PlayerID, 
+          p.Name, 
+          p.Age, 
+          p.Position, 
+          p.TeamID,
+          t.Name AS TeamName,
+          ps.Runs, 
+          ps.Wickets, 
+          ps.TotalInnings
+        FROM Players p
+        LEFT JOIN PlayerStats ps ON p.PlayerID = ps.PlayerID
+        LEFT JOIN Teams t ON p.TeamID = t.TeamID
+        WHERE p.PlayerID = @playerId
+      `);
+
+    // Check if player exists
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
+
+    // Return player data
+    res.status(200).json(result.recordset[0]);
+    
+  } catch (error) {
+    console.error('Error getting player by ID:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
 
 // Update an existing player
 exports.updatePlayer = async (req, res) => {
