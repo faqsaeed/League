@@ -49,32 +49,63 @@ exports.getPlayersByTeam = async (req, res) => {
   }
 };
 
+// Get players by team ID
+exports.getPlayersById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ message: "Team ID is required" });
+
+    const teamID = parseInt(id);
+    if (isNaN(teamID)) return res.status(400).json({ message: "Invalid Team ID" });
+
+    const pool = await mssql.connect(dbConfig);
+    const result = await pool.request()
+      .input('teamID', mssql.Int, teamID)
+      .query(`
+        SELECT p.PlayerID, p.Name, p.Age, p.Position, t.Name AS TeamName,
+               ps.Runs, ps.Wickets, ps.TotalInnings
+        FROM Players p
+        INNER JOIN Teams t ON p.TeamID = t.TeamID
+        LEFT JOIN PlayerStats ps ON p.PlayerID = ps.PlayerID
+        WHERE p.TeamID = @teamID
+      `);
+
+    res.status(200).json(result.recordset);
+  } catch (error) {
+    console.error('Error fetching players by team:', error);
+    res.status(500).json({ 
+      message: 'Error fetching players by team', 
+      error: error.message 
+    });
+  }
+};
+
 // Create a new player
 exports.createPlayer = async (req, res) => {
   try {
     const { Name, Age, Position, TeamID } = req.body;
-    
+
     // Validate required fields
     if (!Name || !Age || !Position || !TeamID) {
       return res.status(400).json({ message: 'All fields are required: Name, Age, Position, TeamID' });
     }
-    
+
     // Start a transaction
     const pool = await mssql.connect(dbConfig);
     const transaction = new mssql.Transaction(pool);
     await transaction.begin();
-    
+
     try {
       // Check if TeamID exists
       const teamCheck = await transaction.request()
         .input('teamID', mssql.Int, TeamID)
         .query('SELECT TeamID FROM Teams WHERE TeamID = @teamID');
-      
+
       if (teamCheck.recordset.length === 0) {
         await transaction.rollback();
         return res.status(404).json({ message: 'Team not found' });
       }
-      
+
       // Insert player
       const playerResult = await transaction.request()
         .input('name', mssql.VarChar(255), Name)
@@ -86,9 +117,9 @@ exports.createPlayer = async (req, res) => {
           OUTPUT INSERTED.PlayerID
           VALUES (@name, @age, @position, @teamID)
         `);
-      
+
       const playerID = playerResult.recordset[0].PlayerID;
-      
+
       // Initialize player stats
       await transaction.request()
         .input('playerID', mssql.Int, playerID)
@@ -99,12 +130,13 @@ exports.createPlayer = async (req, res) => {
           INSERT INTO PlayerStats (PlayerID, Runs, Wickets, TotalInnings)
           VALUES (@playerID, @runs, @wickets, @totalInnings)
         `);
-      
+
       await transaction.commit();
-      
-      res.status(201).json({ 
+
+      // Return success response with player ID
+      res.status(201).json({
         message: 'Player created successfully',
-        playerID: playerID 
+        playerID: playerID,
       });
     } catch (error) {
       await transaction.rollback();
@@ -115,6 +147,7 @@ exports.createPlayer = async (req, res) => {
     res.status(500).json({ message: 'Error creating player', error: error.message });
   }
 };
+
 
 // Update an existing player
 exports.updatePlayer = async (req, res) => {
