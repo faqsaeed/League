@@ -25,6 +25,49 @@ exports.getMatches = async (req, res) => {
     res.status(500).json({ message: 'Error fetching matches', error: error.message });
   }
 };
+// Get match by ID
+exports.getMatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const matchID = parseInt(id, 10);
+
+    if (isNaN(matchID)) {
+      return res.status(400).json({ message: 'Invalid match ID' });
+    }
+
+    const pool = await mssql.connect(dbConfig);
+    const result = await pool.request()
+      .input('matchID', mssql.Int, matchID)
+      .query(`
+        SELECT
+          m.MatchID,
+          m.Date,
+          m.Venue,
+          t1.Name AS Team1Name,
+          t2.Name AS Team2Name,
+          m.Result
+        FROM Matches AS m
+        JOIN Teams AS t1 ON m.Team1ID = t1.TeamID
+        JOIN Teams AS t2 ON m.Team2ID = t2.TeamID
+        WHERE m.MatchID = @matchID;
+      `);
+
+    if (result.recordset.length === 0) {
+      return res
+        .status(404)
+        .json({ message: `\No match found with ID '\${matchID}'\`` });
+    }
+
+    // return a single object, not an array
+    res.status(200).json(result.recordset[0]);
+  } catch (error) {
+    console.error('Error fetching match by ID:', error);
+    res.status(500).json({
+      message: 'Internal server error while fetching the match',
+      error: error.message
+    });
+  }
+};
 
 // Get matches by team Name
 exports.getMatchesByTeam = async (req, res) => {
