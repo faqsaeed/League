@@ -20,7 +20,7 @@ function MainPage() {
   return (
     <div className="main-page">
       <h1 className="main-heading">Teams</h1>
-      {(!auth.isAuthenticated || !auth.isAdmin ) && (
+      {(auth.isAuthenticated && auth.isAdmin ) && (
         <button className="admin-button" onClick={() => navigate("/admin/teamdashboard")}>
           Go to Admin Dashboard
         </button>

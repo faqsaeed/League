@@ -56,7 +56,7 @@ const Matches = () => {
 
   return (
     <div className="matches-container">
-      {(!auth.isAdmin || auth.isAuthenticated) && (
+      {(auth.isAdmin && auth.isAuthenticated) && (
         <div style={{ marginBottom: '20px' }}>
           <a href="/admin/matchdashboard" className="admin-button">Go to Admin Dashboard</a>
         </div>
