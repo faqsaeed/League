@@ -270,3 +270,23 @@ exports.getTeamById = async (req, res) => {
     res.status(500).json({ message: 'Error fetching team', error: error.message });
   }
 };
+
+// get team by name
+exports.getTeamByName = async (req, res) => {
+  const { teamname } = req.params;
+  try {
+    const pool = await mssql.connect(dbConfig);
+    const result = await pool
+      .request()
+      .input("teamname", mssql.VarChar(255), teamname)
+      .query("SELECT * FROM Teams WHERE Name = @teamname");
+
+    if (result.recordset.length === 0)
+      return res.status(404).json({ message: "Team not found" });
+
+    res.status(200).json(result.recordset[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
