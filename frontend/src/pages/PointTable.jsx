@@ -28,7 +28,6 @@ const PointsTable = () => {
             <th>Team</th>
             <th>Matches</th>
             <th>Wins</th>
-            <th>Draws</th>
             <th>Losses</th>
             <th>Points</th>
           </tr>
@@ -40,7 +39,6 @@ const PointsTable = () => {
               <td>{team.TeamName}</td>
               <td>{team.TotalMatches}</td>
               <td>{team.Wins}</td>
-              <td>{team.Draws}</td>
               <td>{team.Losses}</td>
               <td>{team.Points}</td>
             </tr>
