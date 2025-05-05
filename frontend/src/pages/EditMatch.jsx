@@ -20,6 +20,20 @@ const EditMatch = () => {
   const [teams, setTeams] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    const checkAdminStatus = () => {
+      const authStatus = adminCheck();
+      if (!authStatus.isAuthenticated || !authStatus.isAdmin) {
+        navigate('/');
+        return;
+      }
+      setIsAdmin(true);
+    };
+  
+    checkAdminStatus();
+  }, [navigate]);
 
   useEffect(() => {
     const init = async () => {
@@ -92,6 +106,12 @@ const EditMatch = () => {
       Team2ID: matchData.Team2ID || originalMatch.Team2ID,
       Result: matchData.Result || originalMatch.Result
     };
+    if(!isAdmin)
+    {
+      alert("You are not authorized to edit a match.");
+      return;
+    }
+    
 
     try {
       const token = localStorage.getItem('token');

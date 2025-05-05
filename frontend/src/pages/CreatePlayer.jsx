@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
+import adminCheck from "../services/adminCheck";
+import { useNavigate } from 'react-router-dom';
 import "../styles/PlayerDashboard.css";
+
+
 
 function CreatePlayerForm({ teamname, onSuccess }) {
   const { ID } = useParams();
@@ -15,9 +19,29 @@ function CreatePlayerForm({ teamname, onSuccess }) {
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [redirectToPlayerDashboard, setRedirectToPlayerDashboard] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const checkAdminStatus = () => {
+      const authStatus = adminCheck();
+      if (!authStatus.isAuthenticated || !authStatus.isAdmin) {
+        navigate('/');
+        return;
+      }
+      setIsAdmin(true);
+    };
+
+    checkAdminStatus();
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!isAdmin) {
+      alert("You are not authorized to create a player.");
+      return;
+    }
     try {
       const res = await axios.post("http://localhost:5000/api/players", formData, {
         headers: {

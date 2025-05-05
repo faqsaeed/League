@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
+import adminCheck from "../services/adminCheck";
 import "../styles/PlayerDashboard.css";
 
 function EditPlayerForm({ player: propPlayer, onClose, onSuccess }) {
@@ -8,7 +9,20 @@ function EditPlayerForm({ player: propPlayer, onClose, onSuccess }) {
   const navigate = useNavigate();
   const [player, setPlayer] = useState(propPlayer || null);
   const [loading, setLoading] = useState(!propPlayer);
+    const [isAdmin, setIsAdmin] = useState(false);
   
+    useEffect(() => {
+      const checkAdminStatus = () => {
+        const authStatus = adminCheck();
+        if (!authStatus.isAuthenticated || !authStatus.isAdmin) {
+          navigate('/');
+          return;
+        }
+        setIsAdmin(true);
+      };
+  
+      checkAdminStatus();
+    }, [navigate]);
   // Initialize with default empty values to prevent undefined errors
   const [formData, setFormData] = useState({
     Name: "",
@@ -33,8 +47,10 @@ function EditPlayerForm({ player: propPlayer, onClose, onSuccess }) {
       return;
     }
     
+
     // Otherwise, fetch player data using ID from URL
     const playerId = id;
+ 
     if (playerId) {
       setLoading(true);
       axios.get(`http://localhost:5000/api/players/play/${playerId}`, {
@@ -95,7 +111,7 @@ function EditPlayerForm({ player: propPlayer, onClose, onSuccess }) {
             onSuccess(response.data);
           }
           // Navigate to main dashboard
-          navigate('/main');
+          navigate(`/admin/playerdashboard/${player.TeamID}`);
         }, 1500);
       })
       .catch((err) => {

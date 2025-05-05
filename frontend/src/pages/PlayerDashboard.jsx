@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import adminCheck from "../services/adminCheck";
 import "../styles/PlayerDashboard.css";
 
 function AdminTeamDashboard() {
@@ -9,6 +10,20 @@ function AdminTeamDashboard() {
   const [players, setPlayers] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [teamName, setTeamName] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const checkAdminStatus = () => {
+      const authStatus = adminCheck();
+      if (!authStatus.isAuthenticated || !authStatus.isAdmin) {
+        navigate('/');
+        return;
+      }
+      setIsAdmin(true);
+    };
+
+    checkAdminStatus();
+  }, [navigate]);
 
 useEffect(() => {
   axios
@@ -25,6 +40,8 @@ useEffect(() => {
   }, [teamId, refresh]);
 
   const handleDelete = async (id) => {
+    if(isAdmin)
+    {
     try {
       await axios.delete(`http://localhost:5000/api/players/${id}`,
         {
@@ -38,6 +55,7 @@ useEffect(() => {
     } catch (error) {
       console.error("Delete failed", error);
     }
+  }
   };
 
   const handleEdit = (playerId) => {
