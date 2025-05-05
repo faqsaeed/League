@@ -56,7 +56,7 @@ function TeamDashboard() {
           <li key={team.TeamID} className="team-card">
             <strong>{team.Name}</strong> - Coach: {team.Coach}
             <div className="team-actions">
-              <Link to={`admmin/editteam/${team.TeamID}`} className="edit-link">Edit</Link>
+              <Link to={`../../admin/editteam/${team.TeamID}`} className="edit-link">Edit</Link>
               <button onClick={() => handleDelete(team.TeamID)} className="delete-button">Delete</button>
             </div>
           </li>

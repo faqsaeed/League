@@ -23,11 +23,8 @@ function EditTeam() {
        };
          
          checkAdminStatus();
-    axios.get(`http://localhost:5000/api/teams/${teamId}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    }).then(res => {
+    axios.get(`http://localhost:5000/api/teams/id/${teamId}`)
+    .then(res => {
       setName(res.data.Name);
       setCoach(res.data.Coach);
     }).catch(err => {
