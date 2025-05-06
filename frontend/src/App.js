@@ -16,6 +16,7 @@ import EditMatch from "./pages/EditMatch";
 import PlayerDashboard from "./pages/PlayerDashboard";
 import CreatePlayer from "./pages/CreatePlayer";
 import EditPlayer from "./pages/EditPlayer";
+import TeamTransactionsPage from "./pages/Transaction";
 
 function App() {
   const location = useLocation();
@@ -60,6 +61,7 @@ function App() {
         <Route path="/admin/playerdashboard/:teamId" element={<PlayerDashboard />} />
         <Route path="/admin/createplayer/:ID" element={<CreatePlayer/>} />
         <Route path="/admin/editplayer/:id" element={<EditPlayer />} />
+        <Route path="/admin/transactions" element={<TeamTransactionsPage />} />
 </Routes>
     </>
   );

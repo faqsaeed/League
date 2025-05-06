@@ -1,0 +1,141 @@
+/* Transactions.css */
+.transactions-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  /* Player List Styles */
+  .player-list, .transaction-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .player-item, .transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .player-item:hover, .transaction-item:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* Form Styles */
+  .transaction-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .transaction-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .transaction-button:hover {
+    background-color: #45a049;
+  }
+  
+  .submit-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+  
+  .submit-button:hover {
+    background-color: #0b7dda;
+  }
+  
+  .approve-button {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .reject-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Loading and Error States */
+  .loading-spinner {
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    color: #2196F3;
+  }
+  
+  .error-container {
+    padding: 20px;
+    background-color: #ffebee;
+    border-left: 5px solid #f44336;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  
+  .error-container h3 {
+    margin-top: 0;
+    color: #d32f2f;
+  }
+  
+  .transaction-actions {
+    display: flex;
+  }
+  .transaction-info.incoming {
+    background-color: #e6ffe6;
+  }
+  .transaction-info.outgoing {
+    background-color: #ffe6e6;
+  }
+  
