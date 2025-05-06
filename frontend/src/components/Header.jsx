@@ -13,8 +13,9 @@ function Header({ setIsLoggedIn }) {
     navigate("/main");
     window.location.reload(true);
   };
-  const auth =  adminCheck();
-         
+
+  const auth = adminCheck();
+
   return (
     <header className="header">
       <div className="logo" onClick={() => navigate("/")}>Pakistan Super League</div>
@@ -22,12 +23,15 @@ function Header({ setIsLoggedIn }) {
         <Link to="/main">Teams</Link>
         <Link to="/points">Points Table</Link>
         <Link to="/schedule">Match Schedule</Link>
-        
-        {!auth.isAuthenticated ? 
-        ( <Link to="/login" className="auth-btn">Login</Link> )
-        : 
-        ( <button onClick={handleLogout} className="auth-btn logout-btn">Logout</button> )
-        }
+
+        {!auth.isAuthenticated ? (
+          <Link to="/login" className="auth-btn">Login</Link>
+        ) : (
+          <>
+            <Link to="/admin/transactions">Transactions</Link>
+            <button onClick={handleLogout} className="auth-btn logout-btn">Logout</button>
+          </>
+        )}
       </nav>
     </header>
   );
